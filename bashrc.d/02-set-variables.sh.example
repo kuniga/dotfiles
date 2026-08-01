@@ -1,0 +1,23 @@
+# マシン固有の環境変数。
+# install.sh がこのファイルを 02-set-variables.sh としてコピーするので、
+# コピー先を各マシンの環境に合わせて書き換える（実ファイルは .gitignore 済み）。
+
+# lima のデフォルトインスタンス名
+LIMA_INSTANCE=docker
+# LIMA_INSTANCE=podman
+export LIMA_INSTANCE
+
+# lima 上の k8s を使う場合の kubeconfig
+KUBECONFIG=$HOME/.lima/k8s/copied-from-guest/kubeconfig.yaml
+export KUBECONFIG
+
+# ls の色。seebi/dircolors-solarized のファイル名を指定する（40-dircolors.sh が読む）
+# 明るい背景なら dircolors.ansi-light、暗い背景なら dircolors.ansi-dark など
+# DIRCOLORS_THEME=dircolors.ansi-dark
+
+# 1Password CLI (op) のサインイン先
+OP_ADDRESS=my-team.1password.com
+export OP_ADDRESS
+
+OP_EMAIL=me@example.com
+export OP_EMAIL
