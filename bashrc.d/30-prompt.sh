@@ -27,11 +27,17 @@ fi
 _hn=${_hn//[^A-Za-z0-9._-]/}
 _hn=${_hn:-unknown}
 
+case "$_hn" in
+    *prod*) _hc='\[\e[1;31m\]' ;;  # bold red
+    *stg*)  _hc='\[\e[33m\]'   ;;  # yellow
+    *)      _hc='\[\e[32m\]'   ;;  # green
+esac
+
 if declare -f __git_ps1 > /dev/null 2>&1; then
-    _gp_cmd="__git_ps1 \"\[\e[32m\]\u@${_hn}\[\e[0m\] \[\e[34m\]\w\[\e[0m\]\" \" \[\e[2m\]\D{%m/%d %H:%M}\[\e[0m\]\n\$ \" \" \[\e[35m\](%s)\[\e[0m\]\""
+    _gp_cmd="__git_ps1 \"${_hc}\u@${_hn}\[\e[0m\] \[\e[34m\]\w\[\e[0m\]\" \" \[\e[2m\]\D{%m/%d %H:%M}\[\e[0m\]\n\$ \" \" \[\e[35m\](%s)\[\e[0m\]\""
     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }$_gp_cmd"
     unset _gp_cmd
 else
-    PS1="\[\e[32m\]\u@${_hn}\[\e[0m\] \[\e[34m\]\w\[\e[0m\] \[\e[2m\]\D{%m/%d %H:%M}\[\e[0m\]\n\$ "
+    PS1="${_hc}\u@${_hn}\[\e[0m\] \[\e[34m\]\w\[\e[0m\] \[\e[2m\]\D{%m/%d %H:%M}\[\e[0m\]\n\$ "
 fi
-unset _hn
+unset _hn _hc
