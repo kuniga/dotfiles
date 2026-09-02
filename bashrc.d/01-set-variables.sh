@@ -30,8 +30,10 @@ PIPENV_VENV_IN_PROJECT=t
 export PIPENV_VENV_IN_PROJECT
 
 # LANG=en_US.UTF-8
-LANG=ja_JP.UTF-8
-export LANG
+if locale -a 2>/dev/null | grep -qix 'ja_JP\.utf-\?8'; then
+    LANG=ja_JP.UTF-8
+    export LANG
+fi
 
 HISTCONTROL=ignoreboth
 HISTFILESIZE=65536
