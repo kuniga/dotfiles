@@ -10,4 +10,6 @@ export GOOGLE_GENAI_USE_VERTEXAI
 export GOOGLE_CLOUD_PROJECT
 export GOOGLE_CLOUD_LOCATION
 
-alias me-gemini='mise exec node@24 -- gemini'
+me-gemini() {
+  mise exec node@24 -- gemini "$@"
+}
